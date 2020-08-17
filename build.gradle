@@ -1,0 +1,53 @@
+sourceSets.main {
+    java.srcDirs project.projectDir.name
+    resources.srcDirs project.projectDir.name
+}
+version = "$VERSION"
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.anatawa12:compile-time-constant:1.0.1'
+    }
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+}
+
+apply plugin: 'com.anatawa12.compile-time-constant'
+
+tasks.withType(Jar) { compileJava.options.encoding = 'UTF-8' }
+dependencies {
+    compile fileTree(dir: 'lib', include: '*.jar')
+}
+
+runClient {
+    args '--username', 'yuito_3110'
+}
+
+createCompileTimeConstant {
+    constantsClass = "com.github.yuitosaito.crazyweapon.Constants"
+    values version: version.toString()
+}
+
+processResources
+        {
+            // this will ensure that this task is redone when the versions change.
+            inputs.property "version", project.version
+            inputs.property "mcversion", project.minecraft.version
+
+            // replace stuff in mcmod.info, nothing else
+            from(sourceSets.main.resources.srcDirs) {
+                include 'mcmod.info'
+
+                // replace version and mcversion
+                expand 'version': project.version, 'mcversion': project.minecraft.version
+            }
+
+            // copy everything else, thats not the mcmod.info
+            from(sourceSets.main.resources.srcDirs) {
+                exclude 'mcmod.info'
+            }
+        }
