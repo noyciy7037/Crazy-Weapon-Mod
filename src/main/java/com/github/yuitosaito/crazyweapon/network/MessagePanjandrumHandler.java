@@ -13,7 +13,7 @@ public class MessagePanjandrumHandler implements IMessageHandler<MessagePanjandr
         if (ctx.side == Side.CLIENT) {
             EntityPanjandrum entity = (EntityPanjandrum) Minecraft.getMinecraft().theWorld.getEntityByID(message.entityId);
             if (message.type == 0) {
-                if(entity == null)return null;
+                if (entity == null) return null;
                 entity.setRollover(message.data == 1);
                 entity.loaded = true;
             } else if (message.type == 1) {

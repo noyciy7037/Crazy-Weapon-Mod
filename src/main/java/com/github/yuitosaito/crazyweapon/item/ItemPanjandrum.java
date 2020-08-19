@@ -20,7 +20,7 @@ public class ItemPanjandrum extends Item {
         super();
         setCreativeTab(CrazyWeaponMod.tabCWM);
         setUnlocalizedName("itemPanjandrum");
-        setTextureName("crazyweapon:itemPanjandrum");
+        setTextureName(CrazyWeaponMod.MOD_ID + ":itemPanjandrum");
     }
 
     @Override

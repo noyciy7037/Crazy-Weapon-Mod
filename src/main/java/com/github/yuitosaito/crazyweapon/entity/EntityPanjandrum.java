@@ -54,7 +54,7 @@ public class EntityPanjandrum extends Entity {
                     if (!worldObj.isRemote)
                         explode();
                     started = false;
-                }else {
+                } else {
                     preFall = true;
                 }
             }
