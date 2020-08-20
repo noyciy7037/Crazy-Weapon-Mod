@@ -44,10 +44,8 @@ public class BlockFlamethrower extends BlockContainer {
             boolean flag1 = tile.getFire();
 
             if (flag && !flag1) {
-                System.out.println("asd");
                 tile.setFire(true);
             } else if (!flag && flag1) {
-                System.out.println("dsa");
                 tile.setFire(false);
             }
             world.markBlockForUpdate(x, y, z);
