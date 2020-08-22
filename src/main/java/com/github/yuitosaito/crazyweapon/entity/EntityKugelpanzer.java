@@ -117,7 +117,7 @@ public class EntityKugelpanzer extends Entity {
             xzSpeed[1] = -Math.sin(Math.toRadians(angle)) * speed;
         } else if (angle == 90) {
             xzSpeed[0] = 0;
-            xzSpeed[1] = speed;
+            xzSpeed[1] = -speed;
         } else if (angle > 90 && angle < 180) {
             xzSpeed[0] = -Math.sin(Math.toRadians(angle - 90)) * speed;
             xzSpeed[1] = -Math.cos(Math.toRadians(angle - 90)) * speed;
@@ -129,7 +129,7 @@ public class EntityKugelpanzer extends Entity {
             xzSpeed[1] = Math.cos(Math.toRadians(angle - 270)) * speed;
         } else if (angle == 270) {
             xzSpeed[0] = 0;
-            xzSpeed[1] = -speed;
+            xzSpeed[1] = speed;
         } else if (angle > 180 && angle < 270) {
             xzSpeed[0] = -Math.cos(Math.toRadians(angle - 180)) * speed;
             xzSpeed[1] = Math.sin(Math.toRadians(angle - 180)) * speed;
