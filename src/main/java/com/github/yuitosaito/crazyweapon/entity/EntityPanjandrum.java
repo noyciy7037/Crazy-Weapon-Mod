@@ -2,7 +2,6 @@ package com.github.yuitosaito.crazyweapon.entity;
 
 import com.github.yuitosaito.crazyweapon.network.CWMPacketHandler;
 import com.github.yuitosaito.crazyweapon.network.MessagePanjandrum;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,7 +12,6 @@ import java.util.Random;
 
 
 public class EntityPanjandrum extends Entity {
-    public final double G = 0.31481481;
     private float damage = 0;
     private double fallSpeed = 0;
     private final Random rnd = new Random();
@@ -45,9 +43,6 @@ public class EntityPanjandrum extends Entity {
         }
         if (explode) explode();
         motionY = 0;
-        int x = (int) this.posX;
-        int y = (int) this.posY;
-        int z = (int) this.posZ;
         if (started) {
             if (this.isCollided) {
                 if (preFall) {
@@ -58,23 +53,9 @@ public class EntityPanjandrum extends Entity {
                     preFall = true;
                 }
             }
-            if (worldObj.getBlock(x, y - 1, z).getMaterial() == Material.air) {
-                if (worldObj.getBlock(x + 1, y - 1, z + 1).getMaterial() == Material.air &&
-                        worldObj.getBlock(x + 1, y - 1, z).getMaterial() == Material.air &&
-                        worldObj.getBlock(x + 1, y - 1, z - 1).getMaterial() == Material.air &&
-                        worldObj.getBlock(x, y - 1, z + 1).getMaterial() == Material.air &&
-                        worldObj.getBlock(x, y - 1, z - 1).getMaterial() == Material.air &&
-                        worldObj.getBlock(x - 1, y - 1, z + 1).getMaterial() == Material.air &&
-                        worldObj.getBlock(x - 1, y - 1, z).getMaterial() == Material.air &&
-                        worldObj.getBlock(x - 1, y - 1, z - 1).getMaterial() == Material.air) {
-                    fallSpeed += G;
-                    motionY = -fallSpeed;
-                    preFall = false;
-                } else if (fallSpeed != 0) {
-                    fallSpeed = 0;
-                }
-            } else if (fallSpeed != 0) {
-                fallSpeed = 0;
+            if (!onGround) {
+                motionY -= 0.5D;
+                preFall = false;
             }
             if (rotateZ + 360 * 0.41667F / (3 * 3.14F) >= 360) {
                 rotateZ = (rotateZ + 360 * 0.41667F / (3 * 3.14F)) - 360;
@@ -100,25 +81,9 @@ public class EntityPanjandrum extends Entity {
                 }
             }
         } else {
-            if (this.isCollided) {
-                fallSpeed = 0;
-            }
-            if (worldObj.getBlock(x, y - 1, z).getMaterial() == Material.air) {
-                if (worldObj.getBlock(x + 1, y - 1, z + 1).getMaterial() == Material.air &&
-                        worldObj.getBlock(x + 1, y - 1, z).getMaterial() == Material.air &&
-                        worldObj.getBlock(x + 1, y - 1, z - 1).getMaterial() == Material.air &&
-                        worldObj.getBlock(x, y - 1, z + 1).getMaterial() == Material.air &&
-                        worldObj.getBlock(x, y - 1, z - 1).getMaterial() == Material.air &&
-                        worldObj.getBlock(x - 1, y - 1, z + 1).getMaterial() == Material.air &&
-                        worldObj.getBlock(x - 1, y - 1, z).getMaterial() == Material.air &&
-                        worldObj.getBlock(x - 1, y - 1, z - 1).getMaterial() == Material.air) {
-                    fallSpeed += G;
-                    motionY = -fallSpeed;
-                } else if (fallSpeed != 0) {
-                    fallSpeed = 0;
-                }
-            } else if (fallSpeed != 0) {
-                fallSpeed = 0;
+            if (!onGround) {
+                motionY -= 0.5D;
+                preFall = false;
             }
             this.moveEntity(0, motionY, 0);
         }

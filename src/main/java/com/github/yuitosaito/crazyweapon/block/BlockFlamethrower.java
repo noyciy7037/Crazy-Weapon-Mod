@@ -28,7 +28,6 @@ public class BlockFlamethrower extends BlockContainer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float posX, float posY, float posZ) {
         if (!world.isRemote) {
-            world.scheduleBlockUpdate(x, y, z, this, this.tickRate(world));
             TileEntityBlockFlamethrower tile = (TileEntityBlockFlamethrower) world.getTileEntity(x, y, z);
             tile.setFire(!tile.getFire());
             world.markBlockForUpdate(x, y, z);

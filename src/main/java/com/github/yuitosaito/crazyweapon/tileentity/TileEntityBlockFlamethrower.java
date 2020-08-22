@@ -13,7 +13,6 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.biome.BiomeGenBase;
 
 import java.util.List;
 import java.util.Random;
@@ -28,7 +27,6 @@ public class TileEntityBlockFlamethrower extends TileEntity {
 
     @Override
     public void updateEntity() {
-        super.updateEntity();
         if (!isFire) return;
         if (!this.canFire(xCoord, yCoord + 7, zCoord + 1)) return;
         if (worldObj.isRemote) {
@@ -62,6 +60,7 @@ public class TileEntityBlockFlamethrower extends TileEntity {
                 ((Entity) o).setFire(8);
             }
         }
+        super.updateEntity();
     }
 
     @Override
@@ -99,11 +98,8 @@ public class TileEntityBlockFlamethrower extends TileEntity {
     public boolean canFire(int x, int y, int z) {
         if (!worldObj.canBlockSeeTheSky(x, y, z)) {
             return false;
-        } else if (worldObj.getPrecipitationHeight(x, z) > y) {
-            return false;
         } else {
-            BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(x, z);
-            return !biomegenbase.getEnableSnow() && (!worldObj.func_147478_e(x, y, z, false) && biomegenbase.canSpawnLightningBolt());
+            return worldObj.getPrecipitationHeight(x, z) <= y;
         }
     }
 

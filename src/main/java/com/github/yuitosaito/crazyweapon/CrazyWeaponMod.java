@@ -1,7 +1,9 @@
 package com.github.yuitosaito.crazyweapon;
 
 import com.github.yuitosaito.crazyweapon.block.BlockFlamethrower;
+import com.github.yuitosaito.crazyweapon.entity.EntityKugelpanzer;
 import com.github.yuitosaito.crazyweapon.entity.EntityPanjandrum;
+import com.github.yuitosaito.crazyweapon.item.ItemKugelpanzer;
 import com.github.yuitosaito.crazyweapon.item.ItemPanjandrum;
 import com.github.yuitosaito.crazyweapon.network.CWMCommonProxy;
 import com.github.yuitosaito.crazyweapon.network.CWMPacketHandler;
@@ -31,6 +33,7 @@ public class CrazyWeaponMod {
     public static CWMCommonProxy proxy;
 
     public static Item itemPanjandrum;
+    public static Item itemKugelpanzer;
 
     public static Block blockFlamethrower;
 
@@ -41,6 +44,9 @@ public class CrazyWeaponMod {
         itemPanjandrum = new ItemPanjandrum();
         GameRegistry.registerItem(itemPanjandrum, "panjandrum");
 
+        itemKugelpanzer = new ItemKugelpanzer();
+        GameRegistry.registerItem(itemKugelpanzer, "kugelpanzer");
+
         blockFlamethrower = new BlockFlamethrower();
         GameRegistry.registerBlock(blockFlamethrower, "flamethrower");
 
@@ -50,6 +56,7 @@ public class CrazyWeaponMod {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         EntityRegistry.registerModEntity(EntityPanjandrum.class, "Panjandrum", 0, this, 250, 1, true);
+        EntityRegistry.registerModEntity(EntityKugelpanzer.class, "Kugelpanzer", 1, this, 250, 1, true);
         proxy.render();
         proxy.registerTileEntity();
         CWMDispenser.register();

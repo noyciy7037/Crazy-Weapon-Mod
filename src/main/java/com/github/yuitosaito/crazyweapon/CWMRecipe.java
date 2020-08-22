@@ -23,5 +23,12 @@ public class CWMRecipe {
                 'M', Items.lava_bucket,
                 'C', Items.coal
         );
+        GameRegistry.addRecipe(new ItemStack(CrazyWeaponMod.itemKugelpanzer),
+                "###",
+                "#P#",
+                "###",
+                '#', Items.iron_ingot,
+                'P', CrazyWeaponMod.itemPanjandrum
+        );
     }
 }
