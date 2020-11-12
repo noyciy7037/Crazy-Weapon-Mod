@@ -32,6 +32,16 @@ archivesBaseName = "Crazy-weapon"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+minecraft {
+    version = "1.7.10-10.13.4.1558-1.7.10"
+    runDir = "run"
+}
+
+runClient {
+    args '--username', 'yuito_3110'
+    jvmArgs = ['-Dfml.coreMods.load=com.github.yuitosaito.enigma.asm.EGCorePlugin']
+}
+
 createCompileTimeConstant {
     constantsClass = "com.github.yuitosaito.crazyweapon.Constants"
     values version: version.toString()
